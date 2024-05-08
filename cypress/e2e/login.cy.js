@@ -17,7 +17,7 @@ describe("Login Válido", () => {
         cy.get(LoginElements.inputUsername)
           .type(usuario.usernames.standard_user);
 
-        cy.get("input[data-test='password']")
+        cy.get()
           .type(usuario.password);
       });
 
