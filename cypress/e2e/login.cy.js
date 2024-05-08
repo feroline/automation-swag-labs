@@ -44,7 +44,7 @@ describe("Login", () => {
   
   });
 
-  it.only("Login com problem_user", () => {
+  it("Login com problem_user", () => {
     let imagemDeErro = "/static/media/sl-404.168b1cce.jpg"
 
     cy.fixture("login")
@@ -63,6 +63,9 @@ describe("Login", () => {
   });
 });
 
+//TODO performance_glitch_user
+//TODO error_user
+//TODO visual_user
 
 
 
