@@ -1,8 +1,10 @@
+//TODO colocar url em arquivos separados
 const URL_LOGIN = "https://www.saucedemo.com/";
 const URL_HOME = "https://www.saucedemo.com/inventory.html";
 
 import LoginElements from "../support/elements/LoginElements.cy";
 
+//TODO Adicionar acesso ao login no arquivo e2e
 beforeEach(() => {
   cy.visit(URL_LOGIN);
   cy.url().should("eq", URL_LOGIN);
@@ -61,13 +63,12 @@ describe("Login", () => {
     });
 
   });
+
+  //TODO performance_glitch_user
+  //TODO error_user
+  //TODO visual_user
+
 });
-
-//TODO performance_glitch_user
-//TODO error_user
-//TODO visual_user
-
-
 
 let inserirLogin = (username, password) => {
   
