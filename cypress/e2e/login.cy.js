@@ -44,7 +44,23 @@ describe("Login", () => {
   
   });
 
+  it.only("Login com problem_user", () => {
+    let imagemDeErro = "/static/media/sl-404.168b1cce.jpg"
 
+    cy.fixture("login")
+    .as("loginFixture")
+    .then((usuario) => {
+      inserirLogin(usuario.usernames.problem_user, usuario.password);
+    });
+    
+    cy.get(LoginElements.buttonLogin)
+    .click()
+    .then(() => {
+      cy.get("img[data-test='inventory-item-sauce-labs-backpack-img']")
+      .should('have.attr', 'src', imagemDeErro)
+    });
+
+  });
 });
 
 
