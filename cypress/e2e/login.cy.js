@@ -62,9 +62,8 @@ describe("Login", () => {
    
 
   });
-  
-  //TODO performance_glitch_user"
-  it.only("Login com performance_glitch_user", () => {
+
+  it("Login com performance_glitch_user", () => {
     const messageErro = "Epic sadface: Sorry, this user has been locked out."
     
     cy.fixture("login")
@@ -74,9 +73,12 @@ describe("Login", () => {
     });
 
     cy.get(LoginElements.buttonLogin)
-    // .click({timeout: 4000}); // O tempo médio de resposta deve ser de até 4s para uma boa exepriência de usuário
+    .click();
+     
+    cy.url().should("eq", URL_HOME);
+    // O tempo médio de resposta deve ser de até 4s para uma boa exepriência de usuário
+    cy.reload({timeout:4000});
 
-    // cy.url().should("eq", URL_HOME);
   
   });
   
