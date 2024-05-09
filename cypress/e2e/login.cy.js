@@ -20,10 +20,9 @@ describe("Login", () => {
       });
 
       cy.get(LoginElements.buttonLogin)
-      .click()
-      .then(() => {
-        cy.url().should("eq", URL_HOME);
-      });
+      .click();
+      
+      cy.url().should("eq", URL_HOME);
     
   });
 
@@ -38,11 +37,11 @@ describe("Login", () => {
     });
 
     cy.get(LoginElements.buttonLogin)
-    .click()
-    .then(() => {
-      cy.get(LoginElements.divErrorMessage).should('contain', messageErro);
-      cy.url().should("eq", URL_LOGIN);
-    });
+    .click();
+    
+    cy.get(LoginElements.divErrorMessage).should('contain', messageErro);
+    cy.url().should("eq", URL_LOGIN);
+
   
   });
 
@@ -56,15 +55,31 @@ describe("Login", () => {
     });
     
     cy.get(LoginElements.buttonLogin)
-    .click()
-    .then(() => {
-      cy.get("img[data-test='inventory-item-sauce-labs-backpack-img']")
+      .click();
+    
+    cy.get("img[data-test='inventory-item-sauce-labs-backpack-img']")
       .should('have.attr', 'src', imagemDeErro)
-    });
+   
 
   });
+  
+  //TODO performance_glitch_user"
+  it.only("Login com performance_glitch_user", () => {
+    const messageErro = "Epic sadface: Sorry, this user has been locked out."
+    
+    cy.fixture("login")
+    .as("loginFixture")
+    .then((usuario) => {
+      inserirLogin(usuario.usernames.performance_glitch_user, usuario.password);
+    });
 
-  //TODO performance_glitch_user
+    cy.get(LoginElements.buttonLogin)
+    // .click({timeout: 4000}); // O tempo médio de resposta deve ser de até 4s para uma boa exepriência de usuário
+
+    // cy.url().should("eq", URL_HOME);
+  
+  });
+  
   //TODO error_user
   //TODO visual_user
 
