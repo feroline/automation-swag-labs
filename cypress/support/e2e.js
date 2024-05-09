@@ -16,5 +16,16 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+//TODO colocar url em arquivos separados
+import URLS from "../support/elements/URLS.cy";
+
+
+//TODO Adicionar acesso ao login no arquivo e2e
+beforeEach(() => {
+  cy.visit('/');
+  cy.url().should("eq", URLS.LOGIN);
+});
+
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

@@ -4,10 +4,10 @@ import LoginElements from "../support/elements/LoginElements.cy";
 import HomeElements from "../support/elements/HomeElements.cy";
 
 //TODO Adicionar acesso ao login no arquivo e2e
-beforeEach(() => {
-  cy.visit('/');
-  cy.url().should("eq", URLS.LOGIN);
-});
+// beforeEach(() => {
+//   cy.visit('/');
+//   cy.url().should("eq", URLS.LOGIN);
+// });
 
 describe("Login", () => {
   it("Login com usuário Standard", () => {
@@ -15,7 +15,7 @@ describe("Login", () => {
     cy.fixture("login")
       .as("loginFixture")
       .then((usuario) => {
-        inserirLogin(usuario.usernames.standard_user, usuario.password);
+        cy.inserirLogin(usuario.usernames.standard_user, usuario.password);
       });
 
       cy.get(LoginElements.buttonLogin)
@@ -32,7 +32,7 @@ describe("Login", () => {
     cy.fixture("login")
     .as("loginFixture")
     .then((usuario) => {
-      inserirLogin(usuario.usernames.locked_out_user, usuario.password);
+      cy.inserirLogin(usuario.usernames.locked_out_user, usuario.password);
     });
 
     cy.get(LoginElements.buttonLogin)
@@ -50,7 +50,7 @@ describe("Login", () => {
     cy.fixture("login")
     .as("loginFixture")
     .then((usuario) => {
-      inserirLogin(usuario.usernames.problem_user, usuario.password);
+      cy.inserirLogin(usuario.usernames.problem_user, usuario.password);
     });
     
     cy.get(LoginElements.buttonLogin)
@@ -70,7 +70,7 @@ describe("Login", () => {
     cy.fixture("login")
     .as("loginFixture")
     .then((usuario) => {
-      inserirLogin(usuario.usernames.performance_glitch_user, usuario.password);
+      cy.inserirLogin(usuario.usernames.performance_glitch_user, usuario.password);
     });
 
     cy.get(LoginElements.buttonLogin)
@@ -89,7 +89,7 @@ describe("Login", () => {
     cy.fixture("login")
     .as("loginFixture")
     .then((usuario) => {
-      inserirLogin(usuario.usernames.error_user, usuario.password);
+      cy.inserirLogin(usuario.usernames.error_user, usuario.password);
     });
 
     cy.get(LoginElements.buttonLogin)
@@ -120,7 +120,7 @@ describe("Login", () => {
     cy.fixture("login")
     .as("loginFixture")
     .then((usuario) => {
-      inserirLogin(usuario.usernames.visual_user, usuario.password);
+      cy.inserirLogin(usuario.usernames.visual_user, usuario.password);
     });
 
     cy.get(LoginElements.buttonLogin)
@@ -131,14 +131,3 @@ describe("Login", () => {
   });
 
 });
-
-let inserirLogin = (username, password) => {
-  
-  cy.get(LoginElements.inputUsername)
-    .type(username);
-
-  cy.get(LoginElements.inputPassword)
-    .type(password);
-
-
-}

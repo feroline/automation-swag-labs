@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import LoginElements from "../support/elements/LoginElements.cy";
+
+Cypress.Commands.add('inserirLogin', (username, password) => {
+    cy.get(LoginElements.inputUsername)
+    .type(username);
+
+  cy.get(LoginElements.inputPassword)
+    .type(password);
+});
