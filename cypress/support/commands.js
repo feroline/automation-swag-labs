@@ -38,3 +38,15 @@ Cypress.Commands.add('inserirLogin', (username, password) => {
     .click();
 
 });
+
+Cypress.Commands.add('login', () => {
+
+  cy.fixture("login")
+  .as("loginFixture")
+  .then((usuario) => {
+    cy.inserirLogin(usuario.usernames.standard_user, usuario.password);
+  });
+  
+  cy.url().should("contains", URLS.HOME);
+  
+});
