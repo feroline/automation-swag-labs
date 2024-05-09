@@ -1,13 +1,7 @@
-//TODO colocar url em arquivos separados
+
 import URLS from "../support/elements/URLS.cy";
 import LoginElements from "../support/elements/LoginElements.cy";
 import HomeElements from "../support/elements/HomeElements.cy";
-
-//TODO Adicionar acesso ao login no arquivo e2e
-// beforeEach(() => {
-//   cy.visit('/');
-//   cy.url().should("eq", URLS.LOGIN);
-// });
 
 describe("Login", () => {
   it("Login com usuário Standard", () => {
