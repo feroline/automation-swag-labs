@@ -10,17 +10,17 @@ describe("Home", () => {
     
     describe("Validar Carrinho", () => {
         it("Adicionar produto ao carrinho", () => {});
-        it("Validar quantidade de produtos no carrinho", () => {});
+        it("Verificar quantidade de produtos no carrinho", () => {});
 
     });
 
-    describe("Validar Links", () => {
-        it("Validar link Twitter", () => {});
-        it("Validar link Facebook", () => {});
-        it("Validar link Linkedin", () => {});
+    describe("Verificar Links", () => {
+        it("Verificar link Twitter", () => {});
+        it("Verificar link Facebook", () => {});
+        it("Verificar link Linkedin", () => {});
     })
 
-    describe("Validar Filtragem", () => {
+    describe("Verificar Filtragem", () => {
         it("Filtro por Nome - A a Z", () => {});
         it("Filtro por Nome - Z a A", () => {});
         it("Filtro por Preço - Low a High", () => {});
