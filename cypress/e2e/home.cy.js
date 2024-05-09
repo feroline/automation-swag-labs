@@ -5,22 +5,22 @@ beforeEach(() => {
    cy.login();
 });
 
-Describe("Home", () => {
+describe("Home", () => {
     it("Verificar produtos da listagem", () => {});
     
-    Describe("Validar Carrinho", () => {
+    describe("Validar Carrinho", () => {
         it("Adicionar produto ao carrinho", () => {});
         it("Validar quantidade de produtos no carrinho", () => {});
 
     });
 
-    Describe("Validar Links", () => {
+    describe("Validar Links", () => {
         it("Validar link Twitter", () => {});
         it("Validar link Facebook", () => {});
         it("Validar link Linkedin", () => {});
     })
 
-    Describe("Validar Filtragem", () => {
+    describe("Validar Filtragem", () => {
         it("Filtro por Nome - A a Z", () => {});
         it("Filtro por Nome - Z a A", () => {});
         it("Filtro por Preço - Low a High", () => {});
