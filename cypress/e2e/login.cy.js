@@ -3,6 +3,7 @@ const URL_LOGIN = "https://www.saucedemo.com/";
 const URL_HOME = "https://www.saucedemo.com/inventory.html";
 
 import LoginElements from "../support/elements/LoginElements.cy";
+import HomeElements from "../support/elements/HomeElements.cy";
 
 //TODO Adicionar acesso ao login no arquivo e2e
 beforeEach(() => {
@@ -93,18 +94,19 @@ describe("Login", () => {
     cy.get(LoginElements.buttonLogin)
     .click();
 
-    cy.get('[data-test="add-to-cart-sauce-labs-backpack"]')
+    cy.get(HomeElements.buttonAddCartBackpack)
     .should('contains.text', 'Add to cart')
     .then($btn => {
       
       $btn.click();
       expect($btn).to.not.exist;
 
-      cy.get('[data-test="remove-sauce-labs-backpack"]')
+      cy.get(HomeElements.buttonRemoveCartBackpack)
         .should('exist')
-        .click();
+        .click().then(() => {
+          expect($btn).to.exist;
+        });
 
-      expect($btn).to.exist;
       
     });
 
