@@ -6,7 +6,24 @@ beforeEach(() => {
 });
 
 describe("Home", () => {
-    it("Verificar produtos da listagem", () => {});
+    it("Verificar produtos da listagem", () => {
+
+        cy.get('[data-test="inventory-list"]').children().should('have.length', 6);
+
+        cy.fixture("inventory").as("inventoryFixture").then((inventory) => {
+            
+            let produtos = inventory.produtos
+     
+            //Verifica se os produtos estão aparecendo na tela de acordo com a fixture Inventory.json
+            produtos.forEach((produto, index) => {
+                cy.get(`[data-test="${produto}"]`)
+                console.log(produto)
+            });
+
+        });
+
+
+    });
     
     describe("Validar Carrinho", () => {
         it("Adicionar produto ao carrinho", () => {});
