@@ -26,13 +26,51 @@ describe("Home", () => {
     });
     
     describe("Validar Carrinho", () => {
-        it.only("Adicionar produto ao carrinho", () => {
+        it("Adicionar todos os produto ao carrinho", () => {
+            cy.get(HomeElements.buttonAddCartBackpack).click();
+            cy.get(HomeElements.buttonAddCartBikeLight).click();
+            cy.get(HomeElements.buttonAddCartBoltTShirt).click();
+            cy.get(HomeElements.buttonAddCartFleeceJacket).click();
+            cy.get(HomeElements.buttonAddCartOnesie).click();
+            cy.get(HomeElements.buttonAddCartTShirtRed).click();
 
+            cy.get(HomeElements.cartBadge).should("have.text", "6");
+        });
+        
+        it("Adiciona um produto ao carrinho", () => {
+            cy.get(HomeElements.buttonAddCartBackpack).click();
+            cy.get(HomeElements.cartBadge).should("have.text", "1");
+        })
+
+        it("Remove todos os produto do carrinho", () => {
+            cy.get(HomeElements.buttonAddCartBackpack).click();
+            cy.get(HomeElements.buttonAddCartBikeLight).click();
+            cy.get(HomeElements.buttonAddCartBoltTShirt).click();
+            cy.get(HomeElements.buttonAddCartFleeceJacket).click();
+            cy.get(HomeElements.buttonAddCartOnesie).click();
+            cy.get(HomeElements.buttonAddCartTShirtRed).click();
+
+            cy.get(HomeElements.buttonRemoveCartBackpack).click();
+            cy.get(HomeElements.buttonRemoveCartBikeLight).click();
+            cy.get(HomeElements.buttonRemoveCartBoltTShirt).click();
+            cy.get(HomeElements.buttonRemoveCartFleeceJacket).click();
+            cy.get(HomeElements.buttonRemoveCartOnesie).click();
+            cy.get(HomeElements.buttonRemoveCartTShirtRed).click();
+
+            cy.get(HomeElements.cartBadge).should("not.exist");
+            
         });
 
-        
-        it("Verificar quantidade de produtos no carrinho", () => {});
-        it("Remove produto ao carrinho", () => {
+        it("Remove um produto do carrinho", () => {
+            cy.get(HomeElements.buttonAddCartBackpack).click();
+            cy.get(HomeElements.buttonAddCartBikeLight).click();
+            cy.get(HomeElements.buttonAddCartBoltTShirt).click();
+            cy.get(HomeElements.buttonAddCartFleeceJacket).click();
+            cy.get(HomeElements.buttonAddCartOnesie).click();
+            cy.get(HomeElements.buttonAddCartTShirtRed).click();
+
+            cy.get(HomeElements.buttonRemoveCartBackpack).click();
+            cy.get(HomeElements.cartBadge).should("have.text", "5");
         });
 
     });
