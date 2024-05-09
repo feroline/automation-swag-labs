@@ -22,6 +22,10 @@ const HomeElements = {
     inventoryList: '[data-test="inventory-list"]',
 
     cartBadge: '[data-test="shopping-cart-badge"]', 
+
+    buttonTwitter: '[data-test="social-twitter"]',
+    buttonFacebook: '[data-test="social-facebook"]',
+    buttonLinkedin: '[data-test="social-linkedin"]',
 }; 
 
 

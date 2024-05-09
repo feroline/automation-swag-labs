@@ -76,9 +76,23 @@ describe("Home", () => {
     });
 
     describe("Verificar Links", () => {
-        it("Verificar link Twitter", () => {});
-        it("Verificar link Facebook", () => {});
-        it("Verificar link Linkedin", () => {});
+        it("Verificar link Twitter", () => {
+            let link = cy.fixture("linksExternos").as("linksExternos").then((link) => {
+                cy.get(HomeElements.buttonTwitter).should("have.attr", "href", link.twitter);
+            });
+
+        });
+        it("Verificar link Facebook", () => {
+            let link = cy.fixture("linksExternos").as("linksExternos").then((link) => {
+                cy.get(HomeElements.buttonFacebook).should("have.attr", "href", link.facebook );
+            });
+        });
+        
+        it("Verificar link Linkedin", () => {
+            let link = cy.fixture("linksExternos").as("linksExternos").then((link) => {
+                cy.get(HomeElements.buttonLinkedin).should("have.attr", "href", link.linkedin );
+            });
+        });
     })
 
     describe("Verificar Filtragem", () => {
