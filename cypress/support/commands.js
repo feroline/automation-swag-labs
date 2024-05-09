@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import LoginElements from "../support/elements/LoginElements.cy";
+import URLS from "../support/elements/URLS.cy";
 
 Cypress.Commands.add('inserirLogin', (username, password) => {
     cy.get(LoginElements.inputUsername)
@@ -32,4 +33,8 @@ Cypress.Commands.add('inserirLogin', (username, password) => {
 
   cy.get(LoginElements.inputPassword)
     .type(password);
+
+  cy.get(LoginElements.buttonLogin)
+    .click();
+
 });

@@ -11,9 +11,6 @@ describe("Login", () => {
       .then((usuario) => {
         cy.inserirLogin(usuario.usernames.standard_user, usuario.password);
       });
-
-      cy.get(LoginElements.buttonLogin)
-      .click();
       
       cy.url().should("contains", URLS.HOME);
     
@@ -28,9 +25,6 @@ describe("Login", () => {
     .then((usuario) => {
       cy.inserirLogin(usuario.usernames.locked_out_user, usuario.password);
     });
-
-    cy.get(LoginElements.buttonLogin)
-    .click();
     
     cy.get(LoginElements.divErrorMessage).should('contain', messageErro);
     cy.url().should("contains", URLS.LOGIN);
@@ -46,10 +40,7 @@ describe("Login", () => {
     .then((usuario) => {
       cy.inserirLogin(usuario.usernames.problem_user, usuario.password);
     });
-    
-    cy.get(LoginElements.buttonLogin)
-      .click();
-    
+  
     cy.url().should("contains", URLS.HOME);
 
     cy.get(HomeElements.imagemDeErro)
@@ -66,9 +57,6 @@ describe("Login", () => {
     .then((usuario) => {
       cy.inserirLogin(usuario.usernames.performance_glitch_user, usuario.password);
     });
-
-    cy.get(LoginElements.buttonLogin)
-    .click();
      
     cy.url().should("contains", URLS.HOME);
 
@@ -85,9 +73,6 @@ describe("Login", () => {
     .then((usuario) => {
       cy.inserirLogin(usuario.usernames.error_user, usuario.password);
     });
-
-    cy.get(LoginElements.buttonLogin)
-    .click();
 
     cy.url().should("contains", URLS.HOME);
 
@@ -116,9 +101,6 @@ describe("Login", () => {
     .then((usuario) => {
       cy.inserirLogin(usuario.usernames.visual_user, usuario.password);
     });
-
-    cy.get(LoginElements.buttonLogin)
-    .click();
 
     cy.url().should("contains", URLS.HOME);
 
