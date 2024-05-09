@@ -8,7 +8,7 @@ beforeEach(() => {
 describe("Home", () => {
     it("Verificar produtos da listagem", () => {
 
-        cy.get('[data-test="inventory-list"]').children().should('have.length', 6);
+        cy.get(HomeElements.inventoryList).children().should('have.length', 6);
 
         cy.fixture("inventory").as("inventoryFixture").then((inventory) => {
             
@@ -26,8 +26,14 @@ describe("Home", () => {
     });
     
     describe("Validar Carrinho", () => {
-        it("Adicionar produto ao carrinho", () => {});
+        it.only("Adicionar produto ao carrinho", () => {
+
+        });
+
+        
         it("Verificar quantidade de produtos no carrinho", () => {});
+        it("Remove produto ao carrinho", () => {
+        });
 
     });
 
