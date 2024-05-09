@@ -83,6 +83,34 @@ describe("Login", () => {
   });
   
   //TODO error_user
+  it.only("Login com usuário error_user", () => {
+    cy.fixture("login")
+    .as("loginFixture")
+    .then((usuario) => {
+      inserirLogin(usuario.usernames.error_user, usuario.password);
+    });
+
+    cy.get(LoginElements.buttonLogin)
+    .click();
+
+    cy.get('[data-test="add-to-cart-sauce-labs-backpack"]')
+    .should('contains.text', 'Add to cart')
+    .then($btn => {
+      
+      $btn.click();
+      expect($btn).to.not.exist;
+
+      cy.get('[data-test="remove-sauce-labs-backpack"]')
+        .should('exist')
+        .click();
+
+      expect($btn).to.exist;
+      
+    });
+
+
+  });
+
   //TODO visual_user
 
 });
