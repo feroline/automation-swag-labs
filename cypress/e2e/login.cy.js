@@ -1,14 +1,12 @@
 //TODO colocar url em arquivos separados
-const URL_LOGIN = "https://www.saucedemo.com/";
-const URL_HOME = "https://www.saucedemo.com/inventory.html";
-
+import URLS from "../support/elements/URLS.cy";
 import LoginElements from "../support/elements/LoginElements.cy";
 import HomeElements from "../support/elements/HomeElements.cy";
 
 //TODO Adicionar acesso ao login no arquivo e2e
 beforeEach(() => {
-  cy.visit(URL_LOGIN);
-  cy.url().should("eq", URL_LOGIN);
+  cy.visit('/');
+  cy.url().should("eq", URLS.LOGIN);
 });
 
 describe("Login", () => {
@@ -23,7 +21,7 @@ describe("Login", () => {
       cy.get(LoginElements.buttonLogin)
       .click();
       
-      cy.url().should("eq", URL_HOME);
+      cy.url().should("contains", URLS.HOME);
     
   });
 
@@ -41,7 +39,7 @@ describe("Login", () => {
     .click();
     
     cy.get(LoginElements.divErrorMessage).should('contain', messageErro);
-    cy.url().should("eq", URL_LOGIN);
+    cy.url().should("contains", URLS.LOGIN);
 
   
   });
@@ -58,7 +56,7 @@ describe("Login", () => {
     cy.get(LoginElements.buttonLogin)
       .click();
     
-    cy.url().should("eq", URL_HOME);
+    cy.url().should("contains", URLS.HOME);
 
     cy.get(HomeElements.imagemDeErro)
       .should('have.attr', 'src', imagemDeErro)
@@ -78,7 +76,7 @@ describe("Login", () => {
     cy.get(LoginElements.buttonLogin)
     .click();
      
-    cy.url().should("eq", URL_HOME);
+    cy.url().should("contains", URLS.HOME);
 
     // O tempo médio de resposta deve ser de até 4s para uma boa exepriência de usuário
     cy.reload({timeout:4000});
@@ -97,7 +95,7 @@ describe("Login", () => {
     cy.get(LoginElements.buttonLogin)
     .click();
 
-    cy.url().should("eq", URL_HOME);
+    cy.url().should("contains", URLS.HOME);
 
     cy.get(HomeElements.buttonAddCartBackpack)
     .should('contains.text', 'Add to cart')
@@ -128,10 +126,9 @@ describe("Login", () => {
     cy.get(LoginElements.buttonLogin)
     .click();
 
+    cy.url().should("contains", URLS.HOME);
 
   });
-
-
 
 });
 
