@@ -58,7 +58,9 @@ describe("Login", () => {
     cy.get(LoginElements.buttonLogin)
       .click();
     
-    cy.get("img[data-test='inventory-item-sauce-labs-backpack-img']")
+    cy.url().should("eq", URL_HOME);
+
+    cy.get(HomeElements.imagemDeErro)
       .should('have.attr', 'src', imagemDeErro)
    
 
@@ -77,14 +79,15 @@ describe("Login", () => {
     .click();
      
     cy.url().should("eq", URL_HOME);
+
     // O tempo médio de resposta deve ser de até 4s para uma boa exepriência de usuário
     cy.reload({timeout:4000});
 
   
   });
   
-  //TODO error_user
-  it.only("Login com usuário error_user", () => {
+  
+  it("Login com usuário error_user", () => {
     cy.fixture("login")
     .as("loginFixture")
     .then((usuario) => {
@@ -93,6 +96,8 @@ describe("Login", () => {
 
     cy.get(LoginElements.buttonLogin)
     .click();
+
+    cy.url().should("eq", URL_HOME);
 
     cy.get(HomeElements.buttonAddCartBackpack)
     .should('contains.text', 'Add to cart')
@@ -106,14 +111,27 @@ describe("Login", () => {
         .click().then(() => {
           expect($btn).to.exist;
         });
-
       
     });
+
+  });
+
+
+  it("Login com usuário visual_user", () => {
+
+    cy.fixture("login")
+    .as("loginFixture")
+    .then((usuario) => {
+      inserirLogin(usuario.usernames.visual_user, usuario.password);
+    });
+
+    cy.get(LoginElements.buttonLogin)
+    .click();
 
 
   });
 
-  //TODO visual_user
+
 
 });
 
@@ -125,6 +143,5 @@ let inserirLogin = (username, password) => {
   cy.get(LoginElements.inputPassword)
     .type(password);
 
-  
 
 }
