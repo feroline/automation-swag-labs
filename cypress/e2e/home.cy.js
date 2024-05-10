@@ -139,7 +139,7 @@ describe("Home", () => {
 
         });
                 
-        it("Filtro por Preço - Low a High", () => {
+        it.only("Filtro por Preço - Low a High", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
@@ -152,9 +152,7 @@ describe("Home", () => {
                         price.text().replace('$', ''))
                     );
             }).then(() => {
-                resultFiltroOrdenado = resultFiltro.sort(
-                    function(a,b){return a-b}
-                );
+                resultFiltroOrdenado = sortNumero(resultFiltro);
 
                 expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
             });
@@ -176,9 +174,7 @@ describe("Home", () => {
                         price.text().replace('$', ''))
                     );
             }).then(() => {
-                resultFiltroOrdenado = resultFiltro.sort(
-                    function(a,b){return a-b}
-                ).reverse();
+                resultFiltroOrdenado = sortNumero(resultFiltro).reverse();
 
                 expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
  
@@ -187,6 +183,14 @@ describe("Home", () => {
         });
     });
 });
+
+let sortNumero = (array) => {
+    return array.sort((a, b) => a - b);
+}
+
+
+
+
     
 
 
