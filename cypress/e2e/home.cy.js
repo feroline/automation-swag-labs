@@ -139,7 +139,7 @@ describe("Home", () => {
 
         });
                 
-        it.only("Filtro por Preço - Low a High", () => {
+        it("Filtro por Preço - Low a High", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
@@ -147,10 +147,7 @@ describe("Home", () => {
             cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (low to high)'); 
 
             cy.get(HomeElements.divPrice).each(price => {
-                resultFiltro.push(
-                    parseFloat(
-                        price.text().replace('$', ''))
-                    );
+                resultFiltro.push(getFloatNumber(price));
             }).then(() => {
                 resultFiltroOrdenado = sortNumero(resultFiltro);
 
@@ -169,13 +166,10 @@ describe("Home", () => {
             cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (high to low)'); 
 
             cy.get(HomeElements.divPrice).each(price => {
-                resultFiltro.push(
-                    parseFloat(
-                        price.text().replace('$', ''))
-                    );
+                resultFiltro.push(getFloatNumber(price));
+                    
             }).then(() => {
                 resultFiltroOrdenado = sortNumero(resultFiltro).reverse();
-
                 expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
  
             });
@@ -188,6 +182,9 @@ let sortNumero = (array) => {
     return array.sort((a, b) => a - b);
 }
 
+let getFloatNumber = (string) => {
+    return parseFloat(string.text().replace('$', ''));
+}
 
 
 
