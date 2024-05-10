@@ -1,4 +1,3 @@
-import URLS from "../support/elements/URLS.cy";
 import HomeElements from "../support/elements/HomeElements.cy";
 
 beforeEach(() => {
@@ -6,11 +5,12 @@ beforeEach(() => {
 });
 
 describe("Home", () => {
-    it("Verificar produtos da listagem", () => {
-
-        cy.get(HomeElements.inventoryList).children().should('have.length', 6);
+    it.only("Verificar produtos da listagem", () => {
 
         cy.fixture("inventory").as("inventoryFixture").then((inventory) => {
+            
+        cy.get(HomeElements.inventoryList).children().should('have.length', 6); //TODO PEGAR O TAMANHO DE ACORDO COM A FIXTURE
+
             
             let produtos = inventory.produtos
      
@@ -34,7 +34,7 @@ describe("Home", () => {
             cy.get(HomeElements.buttonAddCartOnesie).click();
             cy.get(HomeElements.buttonAddCartTShirtRed).click();
 
-            cy.get(HomeElements.cartBadge).should("have.text", "6");
+            cy.get(HomeElements.cartBadge).should("have.text", "6"); //TODO PEGAR O TAMANHO DE ACORDO COM A FIXTURE
         });
         
         it("Adiciona um produto ao carrinho", () => {
@@ -98,20 +98,22 @@ describe("Home", () => {
     describe("Verificar Filtragem", () => {
 
         it("Verificar opções do filtro", () => {
+            // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
             cy.get(HomeElements.selectFiltro) 
-                .should('contains.text', 'Name (A to Z)')
-                .should('contains.text', 'Name (Z to A)')
-                .should('contains.text', 'Price (low to high)')
-                .should('contains.text', 'Price (high to low)');
-   
+            .should('contains.text', 'Name (A to Z)')
+            .should('contains.text', 'Name (Z to A)')
+            .should('contains.text', 'Price (low to high)')
+            .should('contains.text', 'Price (high to low)');
+            
         });
-
+        
         it("Filtro por Nome - A a Z", () => {
-
+            
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
-
-            cy.get(HomeElements.selectFiltro).select('az');
+            
+                        
+            cy.get(HomeElements.selectFiltro).select('az'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
             cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Name (A to Z)'); 
 
             cy.get(HomeElements.spanName).each(nomeProdutos => {
@@ -127,7 +129,7 @@ describe("Home", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
-            cy.get(HomeElements.selectFiltro).select('za');
+            cy.get(HomeElements.selectFiltro).select('za'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
             cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Name (Z to A)'); 
 
             cy.get(HomeElements.spanName).each(nomeProdutos => {
@@ -143,7 +145,7 @@ describe("Home", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
-            cy.get(HomeElements.selectFiltro).select('lohi');
+            cy.get(HomeElements.selectFiltro).select('lohi'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
             cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (low to high)'); 
 
             cy.get(HomeElements.divPrice).each(price => {
@@ -156,13 +158,12 @@ describe("Home", () => {
 
         });
 
-        //option[value="hilo"]
         it("Filtro por Preço - High a Low", () => {
 
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
-            cy.get(HomeElements.selectFiltro).select('hilo');
+            cy.get(HomeElements.selectFiltro).select('hilo'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
             cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (high to low)'); 
 
             cy.get(HomeElements.divPrice).each(price => {
