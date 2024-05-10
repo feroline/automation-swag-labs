@@ -26,6 +26,9 @@ const HomeElements = {
     buttonTwitter: '[data-test="social-twitter"]',
     buttonFacebook: '[data-test="social-facebook"]',
     buttonLinkedin: '[data-test="social-linkedin"]',
+
+    selectFiltro: '[data-test="product-sort-container"]',
+    spanSelectFiltro: '[data-test="active-option"]'
 }; 
 
 

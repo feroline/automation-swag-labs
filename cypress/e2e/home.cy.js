@@ -96,7 +96,37 @@ describe("Home", () => {
     })
 
     describe("Verificar Filtragem", () => {
-        it("Filtro por Nome - A a Z", () => {});
+
+        it("Verificar opções do filtro", () => {
+            cy.get(HomeElements.selectFiltro) 
+                .should('contains.text', 'Name (A to Z)')
+                .should('contains.text', 'Name (Z to A)')
+                .should('contains.text', 'Price (low to high)')
+                .should('contains.text', 'Price (high to low)');
+   
+        });
+
+        it.only("Filtro por Nome - A a Z", () => {
+
+            let resultFiltro = []; 
+            let resultFiltroOrdenado = [];
+
+            cy.get(HomeElements.selectFiltro).select('az');
+            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Name (A to Z)'); 
+
+            cy.get('[data-test="inventory-item-name"]').each(nomeProdutos => {
+                resultFiltro.push(nomeProdutos.text());
+            }).then(() => {
+                resultFiltroOrdenado = resultFiltro.sort();
+                expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
+            });
+
+                //option[value="az"]
+                //option[value="za"]
+                //option[value="lohi"]
+                //option[value="hilo"]
+            
+        });
         it("Filtro por Nome - Z a A", () => {});
         it("Filtro por Preço - Low a High", () => {});
         it("Filtro por Preço - High a Low", () => {});
