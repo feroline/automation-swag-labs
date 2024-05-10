@@ -5,7 +5,7 @@ beforeEach(() => {
 });
 
 describe("Home", () => {
-    it.only("Verificar produtos da listagem", () => {
+    it("Verificar produtos da listagem", () => {
 
         cy.fixture("inventory").as("inventoryFixture").then((inventory) => {
             
@@ -186,10 +186,3 @@ let sortNumero = (array) => {
 let getFloatNumber = (string) => {
     return parseFloat(string.text().replace('$', ''));
 }
-
-
-
-    
-
-
-
