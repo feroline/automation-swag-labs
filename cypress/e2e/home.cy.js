@@ -138,11 +138,8 @@ describe("Home", () => {
             });
 
         });
-
-        
-        //option[value="lohi"]
                 
-        it.only("Filtro por Preço - Low a High", () => {
+        it("Filtro por Preço - Low a High", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
@@ -165,7 +162,29 @@ describe("Home", () => {
         });
 
         //option[value="hilo"]
-        it("Filtro por Preço - High a Low", () => {});
+        it("Filtro por Preço - High a Low", () => {
+
+            let resultFiltro = []; 
+            let resultFiltroOrdenado = [];
+
+            cy.get(HomeElements.selectFiltro).select('hilo');
+            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (high to low)'); 
+
+            cy.get(HomeElements.divPrice).each(price => {
+                resultFiltro.push(
+                    parseFloat(
+                        price.text().replace('$', ''))
+                    );
+            }).then(() => {
+                resultFiltroOrdenado = resultFiltro.sort(
+                    function(a,b){return a-b}
+                ).reverse();
+
+                expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
+ 
+            });
+
+        });
     });
 });
     
