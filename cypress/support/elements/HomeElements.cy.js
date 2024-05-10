@@ -28,7 +28,10 @@ const HomeElements = {
     buttonLinkedin: '[data-test="social-linkedin"]',
 
     selectFiltro: '[data-test="product-sort-container"]',
-    spanSelectFiltro: '[data-test="active-option"]'
+    spanSelectFiltro: '[data-test="active-option"]',
+
+    spanName: '[data-test="inventory-item-name"]',
+    divPrice: '[data-test="inventory-item-price"]'
 }; 
 
 

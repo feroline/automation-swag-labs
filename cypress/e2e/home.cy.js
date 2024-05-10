@@ -106,7 +106,7 @@ describe("Home", () => {
    
         });
 
-        it.only("Filtro por Nome - A a Z", () => {
+        it("Filtro por Nome - A a Z", () => {
 
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
@@ -114,21 +114,57 @@ describe("Home", () => {
             cy.get(HomeElements.selectFiltro).select('az');
             cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Name (A to Z)'); 
 
-            cy.get('[data-test="inventory-item-name"]').each(nomeProdutos => {
+            cy.get(HomeElements.spanName).each(nomeProdutos => {
                 resultFiltro.push(nomeProdutos.text());
             }).then(() => {
                 resultFiltroOrdenado = resultFiltro.sort();
                 expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
             });
-
-                //option[value="az"]
-                //option[value="za"]
-                //option[value="lohi"]
-                //option[value="hilo"]
             
         });
-        it("Filtro por Nome - Z a A", () => {});
-        it("Filtro por Preço - Low a High", () => {});
+
+        it("Filtro por Nome - Z a A", () => {
+            let resultFiltro = []; 
+            let resultFiltroOrdenado = [];
+
+            cy.get(HomeElements.selectFiltro).select('za');
+            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Name (Z to A)'); 
+
+            cy.get(HomeElements.spanName).each(nomeProdutos => {
+                resultFiltro.push(nomeProdutos.text());
+            }).then(() => {
+                resultFiltroOrdenado = resultFiltro.sort().reverse();
+                expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
+            });
+
+        });
+
+        
+        //option[value="lohi"]
+                
+        it.only("Filtro por Preço - Low a High", () => {
+            let resultFiltro = []; 
+            let resultFiltroOrdenado = [];
+
+            cy.get(HomeElements.selectFiltro).select('lohi');
+            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (low to high)'); 
+
+            cy.get(HomeElements.divPrice).each(price => {
+                resultFiltro.push(
+                    parseFloat(
+                        price.text().replace('$', ''))
+                    );
+            }).then(() => {
+                resultFiltroOrdenado = resultFiltro.sort(
+                    function(a,b){return a-b}
+                );
+
+                expect(resultFiltro).to.deep.equal(resultFiltroOrdenado);
+            });
+
+        });
+
+        //option[value="hilo"]
         it("Filtro por Preço - High a Low", () => {});
     });
 });
