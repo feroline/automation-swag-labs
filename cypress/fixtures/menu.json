@@ -5,8 +5,8 @@
     },
     "about": {
         "text": "About",
-        "textBody": "Test on thousands of different device, browser, and OS configurations–anywhere, any time.",
-        "url": "https://saucelabs.com/"
+        "textBody": "Test on thousands of different device, browser, and OS configurations–anywhere, any time."
+
     },
     "logout": {
         "text": "Logout"
