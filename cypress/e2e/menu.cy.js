@@ -8,10 +8,25 @@ beforeEach(() => {
 
 describe("Menu ", () => {
    
-   describe.skip("Visibilidade menu", () => {
-      it("Menu visível", () => {});
+   describe("Visibilidade menu", () => {
 
-      it("Menu não visível", () => {});
+      it.only("Menu não visível", () => {
+         cy.get('.bm-menu')
+         .should("exist")
+         .should("be.not.visible");
+      });
+
+      it.only("Menu visível", () => {
+
+         cy.get('.bm-burger-button')
+            .should("be.visible")
+            .click();
+         
+         cy.get('.bm-menu').should("be.visible");
+         
+      });
+
+
 
    });
    describe("About", () => {
