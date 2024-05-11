@@ -72,7 +72,11 @@ describe("Home", () => {
             cy.get(HomeElements.buttonAddCartTShirtRed).click();
 
             cy.get(HomeElements.buttonRemoveCartBackpack).click();
-            cy.get(HomeElements.cartBadge).should("have.text", "5");
+             
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(HomeElements.cartBadge).should("have.text",  inventory.produtos.length - 1);
+            })
+
         });
 
     });
