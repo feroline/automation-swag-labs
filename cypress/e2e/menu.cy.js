@@ -3,20 +3,20 @@ import HomeElements from "../support/elements/HomeElements.cy";
 
 beforeEach(() => {
    cy.login();
-   cy.fixture("inventory").as("inventoryFixture");
+   cy.fixture("menu").as("menuFixture");
 });
 
 describe("Menu ", () => {
    
    describe("Visibilidade menu", () => {
 
-      it.only("Menu não visível", () => {
+      it("Menu não visível", () => {
          cy.get(MenuElements.divMenu)
          .should("exist")
          .should("be.not.visible");
       });
 
-      it.only("Menu visível", () => {
+      it("Menu visível", () => {
 
          cy.get(MenuElements.buttonMenu)
             .should("be.visible")
@@ -26,11 +26,23 @@ describe("Menu ", () => {
          
       });
 
-
-
+      it.only("Verificar opções Menu", () => {
+         cy.get(MenuElements.buttonMenu)
+         .click();
+         
+         cy.get("@menuFixture").then((menu) => {
+            cy.get(MenuElements.sidebarLinkInventory).should("contains.text", menu.allItems.text )
+            cy.get(MenuElements.sidebarLinkAbout).should("contains.text", menu.about.text)
+            cy.get(MenuElements.sidebarLinkLogout).should("contains.text", menu.logout.text)
+            cy.get(MenuElements.sidebarLinkResetAppState).should("contains.text", menu.resetAppState.text)
+         });
+         
+      })
    });
    describe("About", () => {
-      it("Opção About", () => {});
+      it("Opção About", () => {
+        
+      });
 
       it("Retornar após About", () => {});
    });
