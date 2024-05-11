@@ -17,7 +17,7 @@ describe("Home", () => {
             //Verifica se os produtos estão aparecendo na tela de acordo com a fixture Inventory.json
             produtos.forEach((produto, index) => {
                 cy.get(`[data-test="${produto}"]`)
-                console.log(produto)
+     
             });
 
         });
