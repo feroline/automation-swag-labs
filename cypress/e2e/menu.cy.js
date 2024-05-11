@@ -26,7 +26,7 @@ describe("Menu ", () => {
          
       });
 
-      it.only("Verificar opções Menu", () => {
+      it("Verificar opções Menu", () => {
          cy.get(MenuElements.buttonMenu)
          .click();
          
@@ -40,8 +40,17 @@ describe("Menu ", () => {
       })
    });
    describe("About", () => {
-      it("Opção About", () => {
-        
+      it.only("Opção About", () => {
+         cy.get(MenuElements.buttonMenu)
+         .click();
+         
+         cy.get(MenuElements.sidebarLinkAbout).click();
+
+         cy.get("@menuFixture").then((menu) => {
+            cy.get('.MuiBox-root')
+               .should("contains.text", menu.about.textBody);
+            cy.url().should('be.equal', menu.about.url)
+         });
       });
 
       it("Retornar após About", () => {});
