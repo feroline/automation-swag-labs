@@ -6,7 +6,26 @@
         "inventory-item-sauce-labs-fleece-jacket-img",
         "inventory-item-sauce-labs-onesie-img",
         "inventory-item-test.allthethings()-t-shirt-(red)-img"
-        
-    ]
+    ],
+
+    "filtros":{
+        "aToZ": {
+            "text": "Name (A to Z)",
+            "value": "az"
+        },
+        "zToA": {
+            "text": "Name (Z to A)",
+            "value": "za"
+        }, 
+        "loToHi": {
+            "text": "Price (low to high)",
+            "value": "lohi"
+        },
+        "hiToLo": {
+            "text": "Price (high to low)",
+            "value": "hilo"
+        } 
+    }
+    
 
 }

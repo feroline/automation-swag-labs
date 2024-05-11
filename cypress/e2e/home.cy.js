@@ -25,7 +25,7 @@ describe("Home", () => {
     });
     
     describe("Validar Carrinho", () => {
-        it.only("Adicionar todos os produto ao carrinho", () => {
+        it("Adicionar todos os produto ao carrinho", () => {
             cy.get(HomeElements.buttonAddCartBackpack).click();
             cy.get(HomeElements.buttonAddCartBikeLight).click();
             cy.get(HomeElements.buttonAddCartBoltTShirt).click();
@@ -100,13 +100,15 @@ describe("Home", () => {
     describe("Verificar Filtragem", () => {
 
         it("Verificar opções do filtro", () => {
-            // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
-            cy.get(HomeElements.selectFiltro) 
-            .should('contains.text', 'Name (A to Z)')
-            .should('contains.text', 'Name (Z to A)')
-            .should('contains.text', 'Price (low to high)')
-            .should('contains.text', 'Price (high to low)');
-            
+        
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(HomeElements.selectFiltro) 
+                    .should('contains.text', inventory.filtros.aToZ.text)
+                    .should('contains.text', inventory.filtros.zToA.text)
+                    .should('contains.text', inventory.filtros.loToHi.text)
+                    .should('contains.text', inventory.filtros.hiToLo.text);
+            });
+
         });
         
         it("Filtro por Nome - A a Z", () => {
@@ -114,9 +116,10 @@ describe("Home", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
             
-                        
-            cy.get(HomeElements.selectFiltro).select('az'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
-            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Name (A to Z)'); 
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(HomeElements.selectFiltro).select(inventory.filtros.aToZ.value); 
+                cy.get(HomeElements.spanSelectFiltro).should('have.text', inventory.filtros.aToZ.text); 
+            });            
 
             cy.get(HomeElements.spanName).each(nomeProdutos => {
                 resultFiltro.push(nomeProdutos.text());
@@ -131,8 +134,10 @@ describe("Home", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
-            cy.get(HomeElements.selectFiltro).select('za'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
-            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Name (Z to A)'); 
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(HomeElements.selectFiltro).select(inventory.filtros.zToA.value); 
+                cy.get(HomeElements.spanSelectFiltro).should('have.text', inventory.filtros.zToA.text); 
+            });
 
             cy.get(HomeElements.spanName).each(nomeProdutos => {
                 resultFiltro.push(nomeProdutos.text());
@@ -147,8 +152,10 @@ describe("Home", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
-            cy.get(HomeElements.selectFiltro).select('lohi'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
-            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (low to high)'); 
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(HomeElements.selectFiltro).select(inventory.filtros.loToHi.value);
+                cy.get(HomeElements.spanSelectFiltro).should('have.text', inventory.filtros.loToHi.text); 
+            });
 
             cy.get(HomeElements.divPrice).each(price => {
                 resultFiltro.push(getFloatNumber(price));
@@ -165,8 +172,10 @@ describe("Home", () => {
             let resultFiltro = []; 
             let resultFiltroOrdenado = [];
 
-            cy.get(HomeElements.selectFiltro).select('hilo'); // TODO: PASSAR PARA UMA FIXTURE OS VALORES DAS OPTION
-            cy.get(HomeElements.spanSelectFiltro).should('have.text', 'Price (high to low)'); 
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(HomeElements.selectFiltro).select(inventory.filtros.hiToLo.value);
+                cy.get(HomeElements.spanSelectFiltro).should('have.text', inventory.filtros.hiToLo.text); 
+            });
 
             cy.get(HomeElements.divPrice).each(price => {
                 resultFiltro.push(getFloatNumber(price));
