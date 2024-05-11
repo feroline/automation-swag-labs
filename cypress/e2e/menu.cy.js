@@ -11,18 +11,18 @@ describe("Menu ", () => {
    describe("Visibilidade menu", () => {
 
       it.only("Menu não visível", () => {
-         cy.get('.bm-menu')
+         cy.get(MenuElements.divMenu)
          .should("exist")
          .should("be.not.visible");
       });
 
       it.only("Menu visível", () => {
 
-         cy.get('.bm-burger-button')
+         cy.get(MenuElements.buttonMenu)
             .should("be.visible")
             .click();
          
-         cy.get('.bm-menu').should("be.visible");
+         cy.get(MenuElements.divMenu).should("be.visible");
          
       });
 
