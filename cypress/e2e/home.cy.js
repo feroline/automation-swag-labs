@@ -2,22 +2,21 @@ import HomeElements from "../support/elements/HomeElements.cy";
 
 beforeEach(() => {
    cy.login();
+   cy.fixture("inventory").as("inventoryFixture");
 });
 
 describe("Home", () => {
     it("Verificar produtos da listagem", () => {
 
-        cy.fixture("inventory").as("inventoryFixture").then((inventory) => {
-            
-        cy.get(HomeElements.inventoryList).children().should('have.length', 6); //TODO PEGAR O TAMANHO DE ACORDO COM A FIXTURE
-
+        cy.get('@inventoryFixture').then((inventory) => {
+        
+        cy.get(HomeElements.inventoryList).children().should('have.length', inventory.produtos.length); 
             
             let produtos = inventory.produtos
      
             //Verifica se os produtos estão aparecendo na tela de acordo com a fixture Inventory.json
             produtos.forEach((produto, index) => {
                 cy.get(`[data-test="${produto}"]`)
-     
             });
 
         });
@@ -26,15 +25,18 @@ describe("Home", () => {
     });
     
     describe("Validar Carrinho", () => {
-        it("Adicionar todos os produto ao carrinho", () => {
+        it.only("Adicionar todos os produto ao carrinho", () => {
             cy.get(HomeElements.buttonAddCartBackpack).click();
             cy.get(HomeElements.buttonAddCartBikeLight).click();
             cy.get(HomeElements.buttonAddCartBoltTShirt).click();
             cy.get(HomeElements.buttonAddCartFleeceJacket).click();
             cy.get(HomeElements.buttonAddCartOnesie).click();
             cy.get(HomeElements.buttonAddCartTShirtRed).click();
+            
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(HomeElements.cartBadge).should("have.text", inventory.produtos.length); 
+            })
 
-            cy.get(HomeElements.cartBadge).should("have.text", "6"); //TODO PEGAR O TAMANHO DE ACORDO COM A FIXTURE
         });
         
         it("Adiciona um produto ao carrinho", () => {
