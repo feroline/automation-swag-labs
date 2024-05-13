@@ -58,13 +58,14 @@ describe("Checkout", () => {
             cy.get(CheckoutElements.inputLastname).type(checkout.dadosCompra.dadosVazios.sobrenome);
             cy.get(CheckoutElements.inputPostalZipcode).type(checkout.dadosCompra.dadosVazios.zipcode);
             cy.get(CheckoutElements.buttonContinue).click();
+
+            cy.get(CheckoutElements.errorMessage)
+                .should('be.visible')
+                .and('have.text', checkout.mensagens.errorMessages.firstname);
         });
 
-        cy.get(CheckoutElements.errorMessage)
-            .should('be.visible')
-            .and('have.text', 'Error: First Name is required');
-            
         cy.url().should('contains', URLS.CHECKOUT_STEP_ONE);
+
     
     })
 

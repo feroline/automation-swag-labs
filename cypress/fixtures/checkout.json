@@ -35,7 +35,11 @@
         "information": "Checkout: Your Information",
         "overview": "Checkout: Overview",
         "itemTotal": "Item total: $",
-        "finish":"Thank you for your order!"
+        "finish":"Thank you for your order!",
+        "errorMessages": {
+            "firstname": "Error: First Name is required"
+        }
+
     }
    
 }
