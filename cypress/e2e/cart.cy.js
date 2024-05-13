@@ -28,7 +28,32 @@ describe("Carrinho", () => {
 
     });
 
-    it("Remover um produto do carrinho", () => {});
+    it("Remover um produto do carrinho", () => {
+        cy.get(HomeElements.buttonAddCartBackpack).click();
+        cy.get(HomeElements.buttonAddCartBikeLight).click();
+        cy.get(HomeElements.buttonAddCartBoltTShirt).click();
+        cy.get(HomeElements.buttonAddCartFleeceJacket).click();
+        cy.get(HomeElements.buttonAddCartOnesie).click();
+        cy.get(HomeElements.buttonAddCartTShirtRed).click();
+        
+        cy.get(HomeElements.buttonCart).click();
+        cy.url().should('contains', URLS.CART);
+
+        
+        cy.get('@inventoryFixture').then((inventory) => {
+            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
+            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length);
+        });
+        
+        cy.get(HomeElements.buttonRemoveCartBackpack).click();
+
+              
+        cy.get('@inventoryFixture').then((inventory) => {
+            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
+            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length - 1);
+        });
+
+    });
     it("Realizar Continuação das compras (Continue Shopping)", () => {});
     
     /**
