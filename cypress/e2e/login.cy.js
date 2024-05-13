@@ -180,4 +180,33 @@ describe("Login", () => {
     cy.url().should("contains", URLS.LOGIN);
   
   });
+
+  it("Login com usuário e senhas vazios", () => {
+    cy.fixture("login")
+    .as("loginFixture")
+    .then((usuario) => {
+      cy.inserirLogin(usuario.usuarioSenhaVazio.username, usuario.usuarioSenhaVazio.password);
+      
+      cy.get(LoginElements.divErrorMessage)
+        .should('contain', usuario.usuarioInvalido.errorMessage);
+    });
+    
+    cy.url().should("contains", URLS.LOGIN);
+  
+  });
+
+  it("Login sem usuário e senha", () => {
+   
+
+    cy.get(LoginElements.buttonLogin)
+    .click();
+
+    cy.fixture("login").as("loginFixture").then((usuario) => {
+      cy.get(LoginElements.divErrorMessage)
+        .should('contain', usuario.errorMessageUsername);
+    });
+    
+    cy.url().should("contains", URLS.LOGIN);
+  
+  });
 });

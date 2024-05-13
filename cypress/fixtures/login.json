@@ -9,12 +9,13 @@
   },
   "usuarioInvalido": {
     "username": "usuario_invalido",
-    "password": "senha_invalida",
-    "errorMessage": "Epic sadface: Username and password do not match any user in this service"
+    "password": "senha_invalida"
   },
   "usuarioSenhaVazio": {
     "username": "      ",
     "password": "      "
   },
-  "password": "secret_sauce"
+  "password": "secret_sauce",
+  "errorMessageUsername": "Epic sadface: Username is required",
+  "errorMessageGeneric": "Epic sadface: Username and password do not match any user in this service"
 }
