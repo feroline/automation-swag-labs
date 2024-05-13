@@ -7,5 +7,14 @@
     "error_user": "error_user",
     "visual_user": "visual_user"
   },
+  "usuarioInvalido": {
+    "username": "usuario_invalido",
+    "password": "senha_invalida",
+    "errorMessage": "Epic sadface: Username and password do not match any user in this service"
+  },
+  "usuarioVazio": {
+    "username": " ",
+    "password": " "
+  },
   "password": "secret_sauce"
 }
