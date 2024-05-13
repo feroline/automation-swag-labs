@@ -54,7 +54,35 @@ describe("Carrinho", () => {
         });
 
     });
-    it("Realizar Continuação das compras (Continue Shopping)", () => {});
+    it("Realizar Continuação das compras (Continue Shopping)", () => {
+        cy.get(HomeElements.buttonAddCartBackpack).click();
+        cy.get(HomeElements.buttonAddCartBikeLight).click();
+        cy.get(HomeElements.buttonAddCartBoltTShirt).click();
+        
+        cy.get(HomeElements.buttonCart).click();
+        cy.url().should('contains', URLS.CART);
+
+        
+        cy.get('@inventoryFixture').then((inventory) => {
+            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
+            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length - 3);
+        });
+
+        //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
+        cy.get('[data-test="continue-shopping"]').click();
+        cy.url().should('contains', URLS.HOME);
+        cy.get(HomeElements.buttonAddCartFleeceJacket).click();
+        cy.get(HomeElements.buttonAddCartOnesie).click();
+
+        cy.get(HomeElements.buttonCart).click();
+        cy.url().should('contains', URLS.CART);
+
+        cy.get('@inventoryFixture').then((inventory) => {
+            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
+            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length - 1);
+        });
+
+    });
     
     /**
      * TODO:APÓS IMPLEMENTAR VALIDAÇÃO PARA TELA DE CHECKOUT, IMPLEMENTAR TESTES APENAS NA TELA DE CHECKOUT COM ARQUIVO SEPARADO
