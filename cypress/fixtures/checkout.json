@@ -11,24 +11,9 @@
             "zipcode": "77007-789"
         },
         "dadosInvalidos": {
-            "nome": "7898",
-            "sobrenome": "1232*-",
-            "zipcode": "asdasd*1"
-        },
-        "firstname": {
-            "nome": "João",
-            "sobrenome": "",
-            "zipcode": ""
-        },
-        "lastname": {
-            "nome": "",
-            "sobrenome": "Silva",
-            "zipcode": ""
-        },
-        "zipcode": {
-            "nome": "",
-            "sobrenome": "",
-            "zipcode": "77007-789"
+            "nome": "****",
+            "sobrenome": "*****",
+            "zipcode": "****"
         }
     },
     "mensagens": {
@@ -37,7 +22,9 @@
         "itemTotal": "Item total: $",
         "finish":"Thank you for your order!",
         "errorMessages": {
-            "firstname": "Error: First Name is required"
+            "firstname": "Error: First Name is required",
+            "lastname": "Error: Last Name is required",
+            "zipcode": "Error: Postal Code is required"
         }
 
     }

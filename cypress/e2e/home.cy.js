@@ -1,4 +1,5 @@
 import HomeElements from "../support/elements/HomeElements.cy";
+import getFloatNumber from "../support/functions/getFloatNumber";
 
 beforeEach(() => {
    cy.login();
@@ -196,8 +197,4 @@ describe("Home", () => {
 
 let sortNumero = (array) => {
     return array.sort((a, b) => a - b);
-}
-
-let getFloatNumber = (string) => {
-    return parseFloat(string.text().replace('$', ''));
 }

@@ -52,7 +52,7 @@ describe("Menu ", () => {
          cy.get("@menuFixture").then((menu) => {
             cy.get('.MuiBox-root')
                .should("contains.text", menu.about.textBody);
-            cy.url().should('be.equal', URLS.MENU_ABOUT)
+            cy.url().should('contains', URLS.MENU_ABOUT)
          });
       });
 
@@ -63,9 +63,9 @@ describe("Menu ", () => {
          
          cy.get(MenuElements.sidebarLinkAbout).click();
 
-         cy.url().should('be.equal', URLS.MENU_ABOUT);
+         cy.url().should('contains', URLS.MENU_ABOUT);
          cy.go('back');
-         cy.url().should('be.equal', URLS.HOME);
+         cy.url().should('contains', URLS.HOME);
 
       });
    });

@@ -9,8 +9,10 @@ const CheckoutElements = {
     buttonFinish: '[data-test="finish"]', 
     spanCompleteHeader: '[data-test="complete-header"]',
     buttonBackHome: '[data-test="back-to-products"]',
+    buttonCancel: '[data-test="cancel"]',
 
     errorMessage: '[data-test="error"]'
+
 }
 
 export default CheckoutElements;
