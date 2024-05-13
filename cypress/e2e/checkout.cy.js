@@ -48,6 +48,26 @@ describe("Checkout", () => {
        
     });
 
+    it.only("Inserir dados vázios", () => {
+
+        addItemsToCart();
+
+        cy.get("@checkoutFixture").then((checkout) => {
+            cy.get(CheckoutElements.title).should('have.text', checkout.mensagens.information);
+            cy.get(CheckoutElements.inputFirstname).type(checkout.dadosCompra.dadosVazios.nome);
+            cy.get(CheckoutElements.inputLastname).type(checkout.dadosCompra.dadosVazios.sobrenome);
+            cy.get(CheckoutElements.inputPostalZipcode).type(checkout.dadosCompra.dadosVazios.zipcode);
+            cy.get(CheckoutElements.buttonContinue).click();
+        });
+
+        cy.get(CheckoutElements.errorMessage)
+            .should('be.visible')
+            .and('have.text', 'Error: First Name is required');
+            
+        cy.url().should('contains', URLS.CHECKOUT_STEP_ONE);
+    
+    })
+
 });
 
 let addItemsToCart = () => {

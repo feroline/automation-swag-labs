@@ -8,7 +8,9 @@ const CheckoutElements = {
 
     buttonFinish: '[data-test="finish"]', 
     spanCompleteHeader: '[data-test="complete-header"]',
-    buttonBackHome: '[data-test="back-to-products"]'
+    buttonBackHome: '[data-test="back-to-products"]',
+
+    errorMessage: '[data-test="error"]'
 }
 
 export default CheckoutElements;

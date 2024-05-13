@@ -1,9 +1,9 @@
 {
     "dadosCompra": {
         "dadosVazios": {
-            "nome": "",
-            "sobrenome": "",
-            "zipcode": ""
+            "nome": "  ",
+            "sobrenome": "  ",
+            "zipcode": "  "
         },
         "dadosValidos": {
             "nome": "João",
