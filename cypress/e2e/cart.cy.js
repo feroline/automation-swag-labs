@@ -1,5 +1,4 @@
-import MenuElements from "../support/elements/MenuElements.cy";
-import LoginElements from "../support/elements/LoginElements.cy";
+import CartElements from "../support/elements/CartElements.cy";
 import HomeElements from "../support/elements/HomeElements.cy";
 import URLS from "../support/elements/URLS.cy";
 
@@ -22,8 +21,7 @@ describe("Carrinho", () => {
 
         
         cy.get('@inventoryFixture').then((inventory) => {
-            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
-            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length);
+            cy.get(CartElements.listCartItems).should("have.length", inventory.produtos.length);
         });
 
     });
@@ -41,16 +39,14 @@ describe("Carrinho", () => {
 
         
         cy.get('@inventoryFixture').then((inventory) => {
-            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
-            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length);
+            cy.get(CartElements.listCartItems).should("have.length", inventory.produtos.length);
         });
         
         cy.get(HomeElements.buttonRemoveCartBackpack).click();
 
               
         cy.get('@inventoryFixture').then((inventory) => {
-            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
-            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length - 1);
+            cy.get(CartElements.listCartItems).should("have.length", inventory.produtos.length - 1);
         });
 
     });
@@ -64,12 +60,10 @@ describe("Carrinho", () => {
 
         
         cy.get('@inventoryFixture').then((inventory) => {
-            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
-            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length - 3);
+            cy.get(CartElements.listCartItems).should("have.length", inventory.produtos.length - 3);
         });
 
-        //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
-        cy.get('[data-test="continue-shopping"]').click();
+        cy.get(CartElements.buttonContinueShopping).click();
         cy.url().should('contains', URLS.HOME);
         cy.get(HomeElements.buttonAddCartFleeceJacket).click();
         cy.get(HomeElements.buttonAddCartOnesie).click();
@@ -78,8 +72,8 @@ describe("Carrinho", () => {
         cy.url().should('contains', URLS.CART);
 
         cy.get('@inventoryFixture').then((inventory) => {
-            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
-            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length - 1);
+           
+            cy.get(CartElements.listCartItems).should("have.length", inventory.produtos.length - 1);
         });
 
     });
@@ -98,7 +92,7 @@ describe("Carrinho", () => {
      * VALIDAR CHECKOUT FINALIZADO
      * */
 
-    it.only("Realizar Checkout", () => {
+    it("Realizar Checkout", () => {
 
         cy.get(HomeElements.buttonAddCartBackpack).click();
         cy.get(HomeElements.buttonAddCartBikeLight).click();
@@ -111,11 +105,10 @@ describe("Carrinho", () => {
         cy.url().should('contains', URLS.CART);
 
         cy.get('@inventoryFixture').then((inventory) => {
-            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
-            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length );
+            cy.get(CartElements.listCartItems).should("have.length", inventory.produtos.length );
         });
 
-        cy.get('[data-test="checkout"]').click();
+        cy.get(CartElements.buttonCheckout).click();
         cy.url().should('contains', URLS.CHECKOUT_STEP_ONE);
 
     });
