@@ -98,5 +98,25 @@ describe("Carrinho", () => {
      * VALIDAR CHECKOUT FINALIZADO
      * */
 
-    it("Realizar Checkout", () => {});
+    it.only("Realizar Checkout", () => {
+
+        cy.get(HomeElements.buttonAddCartBackpack).click();
+        cy.get(HomeElements.buttonAddCartBikeLight).click();
+        cy.get(HomeElements.buttonAddCartBoltTShirt).click();
+        cy.get(HomeElements.buttonAddCartFleeceJacket).click();
+        cy.get(HomeElements.buttonAddCartOnesie).click();
+        cy.get(HomeElements.buttonAddCartTShirtRed).click();
+        
+        cy.get(HomeElements.buttonCart).click();
+        cy.url().should('contains', URLS.CART);
+
+        cy.get('@inventoryFixture').then((inventory) => {
+            //TODO: PASSAR O DATA TEST PARA UM ARQUIVO DE ELEMENTOS
+            cy.get('[data-test="inventory-item"]').should("have.length", inventory.produtos.length );
+        });
+
+        cy.get('[data-test="checkout"]').click();
+        cy.url().should('contains', URLS.CHECKOUT_STEP_ONE);
+
+    });
 });
