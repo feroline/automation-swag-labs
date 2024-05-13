@@ -12,7 +12,7 @@
     "password": "senha_invalida",
     "errorMessage": "Epic sadface: Username and password do not match any user in this service"
   },
-  "usuarioVazio": {
+  "usuarioSenhaVazio": {
     "username": " ",
     "password": " "
   },
