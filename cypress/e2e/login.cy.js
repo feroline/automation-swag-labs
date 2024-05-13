@@ -119,7 +119,7 @@ describe("Login", () => {
   
   });
 
-  //TODO: LOGIN COM USUÁRIO INVÁLIDO E SENHA VÁLIDA
+  
   it("Login com usuário inválido e senha válida", () => {
 
     cy.fixture("login")
@@ -134,7 +134,22 @@ describe("Login", () => {
     cy.url().should("contains", URLS.LOGIN);
   
   });
+
   //TODO: LOGIN COM SENHA INVÁLIDA  E USUÁRIO VÁLIDO
+  it("Login com usuário inválido e senha válida", () => {
+
+    cy.fixture("login")
+    .as("loginFixture")
+    .then((usuario) => {
+      cy.inserirLogin(usuario.usernames.standard_user, usuario.usuarioInvalido.password);
+      
+      cy.get(LoginElements.divErrorMessage)
+        .should('contain', usuario.usuarioInvalido.errorMessage);
+    });
+    
+    cy.url().should("contains", URLS.LOGIN);
+  
+  });
   //TODO: LOGIN COM USUÁRIO VÁLIDO E SENHA VAZIA
   //TODO: LOGIN COM USUÁRIO VAZIO E SENHA VÁLIDA
 });
