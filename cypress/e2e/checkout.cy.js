@@ -1,41 +1,51 @@
 import CartElements from "../support/elements/CartElements.cy";
 import HomeElements from "../support/elements/HomeElements.cy";
 import URLS from "../support/elements/URLS.cy";
+import CheckoutElements from "../support/elements/CheckoutElements.cy";
 
 beforeEach(() => {
    cy.login();
    cy.fixture("inventory").as("inventoryFixture");
+   cy.fixture("checkout").as("checkoutFixture");
 });
 describe("Checkout", () => {
     it("Inserir Dados válidos - Checkout Complete", () => {
 
         addItemsToCart();
 
-        cy.get('[data-test="title"]').should('have.text', 'Checkout: Your Information');
-        cy.get('[data-test="firstName"]').type('Ana Maria');
-        cy.get('[data-test="lastName"]').type('Silva');
-        cy.get('[data-test="postalCode"]').type('77005-789');
-        cy.get('[data-test="continue"]').click();
+        cy.get("@checkoutFixture").then((checkout) => {
+            cy.get(CheckoutElements.title).should('have.text', checkout.mensagens.information);
+            cy.get(CheckoutElements.inputFirstname).type(checkout.dadosCompra.dadosValidos.nome);
+            cy.get(CheckoutElements.inputLastname).type(checkout.dadosCompra.dadosValidos.sobrenome);
+            cy.get(CheckoutElements.inputPostalZipcode).type(checkout.dadosCompra.dadosValidos.zipcode);
+            cy.get(CheckoutElements.buttonContinue).click();
 
-        cy.get('[data-test="title"]').should('have.text', 'Checkout: Overview');
-        cy.url().should('contains', URLS.CHECKOUT_STEP_TWO);
+        
+            cy.get(CheckoutElements.title).should('have.text', checkout.mensagens.overview);
 
-        cy.get('@inventoryFixture').then((inventory) => {
-            cy.get(CartElements.listCartItems).should('have.length', inventory.produtos.length);
+            cy.url().should('contains', URLS.CHECKOUT_STEP_TWO);
+        
+            cy.get('@inventoryFixture').then((inventory) => {
+                cy.get(CartElements.listCartItems).should('have.length', inventory.produtos.length);
+            });
+            
+            let subtotal = 0.0;
+            cy.get(HomeElements.divPrice).each(price => {
+                subtotal += getFloatNumber(price);
+            }).then(() => {
+                cy.get(CheckoutElements.labelSubtotal).should('have.text', checkout.mensagens.itemTotal + subtotal.toFixed(2));
+            });
+            
+            cy.get(CheckoutElements.buttonFinish).click();
+            cy.url().should('contains', URLS.CHECKOUT_COMPLETE);
+
+            cy.get(CheckoutElements.spanCompleteHeader).should('have.text', checkout.mensagens.finish);
+            cy.get(CheckoutElements.buttonBackHome).click();
+            cy.url().should('contains', URLS.HOME);
+
         });
-
-        let subtotal = 0.0;
-        cy.get(HomeElements.divPrice).each(price => {
-            subtotal += getFloatNumber(price);
-        }).then(() => {
-            cy.get('[data-test="subtotal-label"]').should('have.text', 'Item total: $' + subtotal.toFixed(2));
-        });
-
-        cy.get('[data-test="finish"]').click();
-        cy.url().should('contains', URLS.CHECKOUT_COMPLETE);
-        cy.get('[data-test="complete-header"]').should('have.text', 'Thank you for your order!');
-        cy.get('[data-test="back-to-products"]').click();
-        cy.url().should('contains', URLS.HOME);
+        
+       
     });
 
 });
@@ -60,6 +70,7 @@ let addItemsToCart = () => {
         
 }
 
+//TODO: MOVER PARA O COMMANDS, TANTO COMO O DA HOME QUANTO O DO CHECKOUT
 let getFloatNumber = (string) => {
     return parseFloat(string.text().replace('$', ''));
 }

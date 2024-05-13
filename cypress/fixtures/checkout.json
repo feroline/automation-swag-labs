@@ -1,0 +1,41 @@
+{
+    "dadosCompra": {
+        "dadosVazios": {
+            "nome": "",
+            "sobrenome": "",
+            "zipcode": ""
+        },
+        "dadosValidos": {
+            "nome": "João",
+            "sobrenome": "Silva",
+            "zipcode": "77007-789"
+        },
+        "dadosInvalidos": {
+            "nome": "7898",
+            "sobrenome": "1232*-",
+            "zipcode": "asdasd*1"
+        },
+        "firstname": {
+            "nome": "João",
+            "sobrenome": "",
+            "zipcode": ""
+        },
+        "lastname": {
+            "nome": "",
+            "sobrenome": "Silva",
+            "zipcode": ""
+        },
+        "zipcode": {
+            "nome": "",
+            "sobrenome": "",
+            "zipcode": "77007-789"
+        }
+    },
+    "mensagens": {
+        "information": "Checkout: Your Information",
+        "overview": "Checkout: Overview",
+        "itemTotal": "Item total: $",
+        "finish":"Thank you for your order!"
+    }
+   
+}
