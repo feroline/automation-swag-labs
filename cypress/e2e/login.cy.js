@@ -150,13 +150,12 @@ describe("Login", () => {
   
   });
 
-  //TODO: LOGIN COM USUÁRIO VÁLIDO E SENHA VAZIA
-  it("Login com usuário inválido e senha válida", () => {
+  it("Login com usuário inválido e senha vazia", () => {
 
     cy.fixture("login")
     .as("loginFixture")
     .then((usuario) => {
-      cy.inserirLogin(usuario.usernames.standard_user, usuario.usuarioInvalido.password);
+      cy.inserirLogin(usuario.usernames.standard_user, usuario.usuarioSenhaVazio.password);
       
       cy.get(LoginElements.divErrorMessage)
         .should('contain', usuario.usuarioInvalido.errorMessage);
@@ -165,5 +164,20 @@ describe("Login", () => {
     cy.url().should("contains", URLS.LOGIN);
   
   });
-  //TODO: LOGIN COM USUÁRIO VAZIO E SENHA VÁLIDA
+
+
+  it("Login com usuário inválido e senha vazia", () => {
+
+    cy.fixture("login")
+    .as("loginFixture")
+    .then((usuario) => {
+      cy.inserirLogin(usuario.usuarioSenhaVazio.username, usuario.password);
+      
+      cy.get(LoginElements.divErrorMessage)
+        .should('contain', usuario.usuarioInvalido.errorMessage);
+    });
+    
+    cy.url().should("contains", URLS.LOGIN);
+  
+  });
 });

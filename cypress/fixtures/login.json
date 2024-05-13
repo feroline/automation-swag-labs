@@ -13,8 +13,8 @@
     "errorMessage": "Epic sadface: Username and password do not match any user in this service"
   },
   "usuarioSenhaVazio": {
-    "username": " ",
-    "password": " "
+    "username": "      ",
+    "password": "      "
   },
   "password": "secret_sauce"
 }
