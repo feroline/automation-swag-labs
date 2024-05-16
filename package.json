@@ -1,6 +1,12 @@
 {
   "devDependencies": {
-    "cypress": "^13.9.0"
-  }
+    "cypress": "^13.9.0",
+    "start-server-and-test": "^2.0.3"
+  },
+  "scripts": {
+      "start": "my-server -p 3030",
+      "cy:run": "cypress run",
+      "test": "start-server-and-test start http://localhost:3030 cy:run"
+    }
   
 }
